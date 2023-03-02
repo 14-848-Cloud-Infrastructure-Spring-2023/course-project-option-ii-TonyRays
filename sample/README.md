@@ -9,4 +9,4 @@ Linux: docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e C
 Open http://localhost:3001/
 
 
-# (Checkpoint) Note: for now I used data from https://jsonplaceholder.typicode.com/todos?_page=1&_limit=10
+(Checkpoint) Note: for now I used data from https://jsonplaceholder.typicode.com/todos?_page=1&_limit=10
