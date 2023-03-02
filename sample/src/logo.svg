@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+    <g fill="#61DAFB">
+        <circle cx="150" cy="150" r="100.0"/>
+        <g transform="translate(150 150)">
+            <g>
+            <polygon points="0,0 36,-50 0,-100" fill="#EDD8B7" />
+            <polygon points="0,0 -36,-50 0,-100" fill="#E5C39C" />
+            </g>
+            <g transform="rotate(72)">
+            <polygon points="0,0 36,-50 0,-100" fill="#EDD8B7" />
+            <polygon points="0,0 -36,-50 0,-100" fill="#E5C39C" />
+            </g>
+            <g transform="rotate(-72)">
+            <polygon points="0,0 36,-50 0,-100" fill="#EDD8B7" />
+            <polygon points="0,0 -36,-50 0,-100" fill="#E5C39C" />
+            </g>
+            <g transform="rotate(144)">
+            <polygon points="0,0 36,-50 0,-100" fill="#EDD8B7" />
+            <polygon points="0,0 -36,-50 0,-100" fill="#E5C39C" />
+            </g>
+            <g transform="rotate(-144)">
+            <polygon points="0,0 36,-50 0,-100" fill="#EDD8B7" />
+            <polygon points="0,0 -36,-50 0,-100" fill="#E5C39C" />
+            </g>
+        </g>
+    </g>
+</svg>
