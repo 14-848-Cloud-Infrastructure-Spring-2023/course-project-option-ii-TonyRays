@@ -10,6 +10,8 @@ const Icon = () => {
   );
 };
 
+ 
+
 const Dropdown = ({ placeHolder, options }) => {
   const [showMenu, setShowMenu] = React.useState(false);
 
@@ -18,7 +20,9 @@ const Dropdown = ({ placeHolder, options }) => {
   };
 
   useEffect(() => {
-    const handler = (event) => setShowMenu(false);
+    const handler = (event) => {
+      setShowMenu(false);
+    };
 
     window.addEventListener("click", handler);
     return () => {window.removeEventListener("click", handler);}
@@ -27,6 +31,12 @@ const Dropdown = ({ placeHolder, options }) => {
   const handleInputClick = (event) => {
     event.stopPropagation();
     setShowMenu(!showMenu);
+    console.log("event:", event.target.textContent);
+    if (event.target.textContent !== "10" && event.target.textContent !== "20" && event.target.textContent !== "50") {
+      return;
+    }
+    let ele = document.getElementById("dropdown-selected-value-id");
+    ele.textContent = event.target.textContent;
   };
 
   return (
@@ -39,7 +49,7 @@ const Dropdown = ({ placeHolder, options }) => {
               </div>
             ))}
         </div>)}
-        <div className="dropdown-selected-value">{getDisplay()}</div>
+        <div className="dropdown-selected-value" id="dropdown-selected-value-id">{getDisplay()}</div>
           <div className="dropdown-tools">
             <div className="dropdown-tool">
               <Icon />

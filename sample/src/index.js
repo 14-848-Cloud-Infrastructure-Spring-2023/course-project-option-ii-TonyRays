@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import logo from './logo.svg';
-import Dropdown from './pages/dropdown';
+import Dropdown from './component/dropdown';
 import axios from 'axios';
 
 import Table from '@mui/material/Table';
@@ -38,6 +38,7 @@ const Result = ({searchResults}) => {
     <Table style={{backgroundColor:'white'}}>
       <TableHead>
           <TableRow>
+              <TableCell>Id</TableCell>
               <TableCell>userId</TableCell>
               <TableCell>title</TableCell>
               <TableCell>complete</TableCell>
@@ -47,6 +48,7 @@ const Result = ({searchResults}) => {
       <TableBody>
           {searchResults.map(item => (
               <TableRow key={item.id}>
+                  <TableCell>{item.id}</TableCell>
                   <TableCell>{item.userId}</TableCell>
                   <TableCell>{item.title}</TableCell>
                   <TableCell>{item.complete? "Yes" : "No"}</TableCell>
@@ -67,10 +69,17 @@ class Container extends React.Component {
       searchResults: [],
       isLoaded: false,
       nPerPage: 10,
+      showTopN: false,
     }
 
     this.onSearchQueryChange = this.onSearchQueryChange.bind(this);
     this.onSearch = this.onSearch.bind(this);
+  }
+
+  setnPerPage = (val) => {
+    this.setState({
+      nPerPage: val
+    })
   }
 
   onSearchQueryChange(e) {
@@ -80,13 +89,12 @@ class Container extends React.Component {
   onSearch() {
     // axios
     axios
-    .get("https://jsonplaceholder.typicode.com/todos?_page=1&_limit=10")
+    .get("https://jsonplaceholder.typicode.com/todos?_page=1&_limit=" + document.getElementById("dropdown-selected-value-id").textContent)
     .then(response => {
       this.setState({
         isLoaded: true,
         searchResults: response.data
       });
-      // console.log("response:", response.data);
     })
     .catch(function(error) {
       this.setState({
@@ -112,7 +120,7 @@ class Container extends React.Component {
           search={this.onSearch}
         />
         <p>&nbsp;&nbsp;show&nbsp;</p>
-        <Dropdown placeHolder="10" options = {options}/>
+        <Dropdown placeHolder={this.state.nPerPage} options = {options}/>
         <p>&nbsp;per page</p>
       </div>
       <Result searchResults={searchResults} />
