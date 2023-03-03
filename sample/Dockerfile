@@ -14,6 +14,8 @@ RUN npm install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 RUN npm install axios
 RUN npm install @mui/material @emotion/react @emotion/styled
+RUN npm install react-router-dom
+RUN npm install react-bootstrap
 # add app
 COPY . ./
 
