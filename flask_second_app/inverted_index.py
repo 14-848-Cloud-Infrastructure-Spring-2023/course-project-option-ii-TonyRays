@@ -1,0 +1,1 @@
+word_postings = {} # inverted index

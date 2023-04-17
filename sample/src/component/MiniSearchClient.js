@@ -32,15 +32,18 @@ const Search = (props) => {
   }
   
   const Result = ({searchResults}) => {
+    // length === 0 or undefined
+    if (!searchResults || searchResults.length === 0) {
+      return <div>No results</div>;
+    }
     return (<div>
       {/* <TextField/> */}
       <Table style={{backgroundColor:'white'}}>
         <TableHead>
             <TableRow>
                 <TableCell>Id</TableCell>
-                <TableCell>userId</TableCell>
-                <TableCell>title</TableCell>
-                <TableCell>complete</TableCell>
+                <TableCell>filepath</TableCell>
+                <TableCell>frequency</TableCell>
                 <TableCell></TableCell>
             </TableRow>
         </TableHead>
@@ -48,9 +51,8 @@ const Search = (props) => {
             {searchResults.map(item => (
                 <TableRow key={item.id}>
                     <TableCell>{item.id}</TableCell>
-                    <TableCell>{item.userId}</TableCell>
-                    <TableCell>{item.title}</TableCell>
-                    <TableCell>{item.complete? "Yes" : "No"}</TableCell>
+                    <TableCell>{item.filepath}</TableCell>
+                    <TableCell>{item.frequency}</TableCell>
                 </TableRow>
             ))}
         </TableBody>
@@ -85,26 +87,48 @@ const Search = (props) => {
       this.setState({searchQuery: e.target.value});
     }
   
+    // onSearch() {
+    //   // axios
+    //   axios
+    //   .get("https://jsonplaceholder.typicode.com/todos?_page=1&_limit=" + document.getElementById("dropdown-selected-value-id").textContent)
+    //   .then(response => {
+    //     this.setState({
+    //       isLoaded: true,
+    //       searchResults: response.data
+    //     });
+    //   })
+    //   .catch(function(error) {
+    //     this.setState({
+    //       isLoaded: true,
+    //       error
+    //     });
+    //   });
+      
+    //   // setTimeout(() => {
+    //   //   this.setState({searchResults: ["mock data "+  + Math.random(), "mock data 1", "mock data 2", "mock data 3", "mock data 4"]});
+    //   // }, 1000)
+    // }
+
     onSearch() {
-      // axios
       axios
-      .get("https://jsonplaceholder.typicode.com/todos?_page=1&_limit=" + document.getElementById("dropdown-selected-value-id").textContent)
+      .get("http://34.106.106.203:5000/term_search", {
+        params: {
+          term: this.state.searchQuery,
+          // limit: document.getElementById("dropdown-selected-value-id").textContent
+        }
+      })
       .then(response => {
         this.setState({
           isLoaded: true,
-          searchResults: response.data
+          searchResults: response.data.results
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         this.setState({
           isLoaded: true,
           error
         });
       });
-      
-      // setTimeout(() => {
-      //   this.setState({searchResults: ["mock data "+  + Math.random(), "mock data 1", "mock data 2", "mock data 3", "mock data 4"]});
-      // }, 1000)
     }
   
     render() {
