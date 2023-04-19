@@ -22,5 +22,6 @@ compressed video:
 Docker Hub images:
 tonyrays/dockerhub:projtimagepush2
 
-- Please feel free to reach out to me via email if you encounter any issues with opening the video or PDF.
+- Please feel free to reach out to me via email if you encounter any issues with opening the video or PDF. Have a nice day.
+
 my email: haichuax@andrew.cmu.edu
