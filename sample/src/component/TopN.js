@@ -32,9 +32,10 @@ const Search = (props) => {
           </div>;
   }
   
-  const Result = ({searchResults}) => {
+  const Result = ({searchResults, execution_time}) => {
     return (<div>
       {/* <TextField/> */}
+      <h3>Your search was executed in {execution_time} seconds</h3>
       <Table style={{backgroundColor:'white'}}>
         <TableHead>
             <TableRow>
@@ -68,6 +69,7 @@ const Search = (props) => {
         isLoaded: false,
         nPerPage: 10,
         showTopN: false,
+        execution_time: 0
       }
   
       this.onSearchQueryChange = this.onSearchQueryChange.bind(this);
@@ -107,7 +109,7 @@ const Search = (props) => {
     // }
     onSearch() {
       axios
-      .get("http://34.106.64.114:5000/top_n_search", {
+      .get("http://34.106.238.243:5000/top_n_search", {
         params: {
           n: document.getElementById("dropdown-selected-value-id").textContent
         }
@@ -115,7 +117,8 @@ const Search = (props) => {
       .then(response => {
         this.setState({
           isLoaded: true,
-          searchResults: response.data.results
+          searchResults: response.data.results[0],
+          execution_time: response.data.results[1]
         });
       })
       .catch(function (error) {
@@ -127,7 +130,7 @@ const Search = (props) => {
     }
   
     render() {
-      const {searchResults, searchQuery} = this.state;
+      const {searchResults, searchQuery, execution_time} = this.state;
       const options = [{value: '10', label: '10'}, {value: '20', label: '20'}, {value: '50', label: '50'}, {value: '100', label: '100'}];
       return (
       <div>
@@ -142,7 +145,7 @@ const Search = (props) => {
             search={this.onSearch}
           />
         </div>
-        <Result searchResults={searchResults} />
+        <Result searchResults={searchResults} execution_time={execution_time} />
       </div>);
     }
   }

@@ -1,6 +1,9 @@
 from collections import Counter
+import time
 
 def top_n_search(n, word_postings):
+    start_time = time.time()
+    
     # Create a Counter object to count term frequencies across all documents
     term_frequencies = Counter()
 
@@ -13,4 +16,6 @@ def top_n_search(n, word_postings):
 
     # Return the results
     results = [{"term": term, "frequency": frequency} for term, frequency in top_n_terms]
-    return results
+    
+    execution_time = time.time() - start_time
+    return results, execution_time

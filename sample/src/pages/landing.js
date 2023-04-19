@@ -47,7 +47,7 @@ const uploadCallback = () => {
     const formData = new FormData();
     formData.append("file", file);
     
-    axios.post("http://34.106.64.114:5000/upload", formData, {
+    axios.post("http://34.106.238.243:5000/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
