@@ -8,6 +8,7 @@ import zipfile
 import subprocess
 from werkzeug.utils import secure_filename
 import json
+import glob
 
 UPLOAD_FOLDER = './uploaded_files'
 ALLOWED_EXTENSIONS = {'zip'}
@@ -88,28 +89,42 @@ def upload_folder():
         
         # Move the extracted files to HDFS
         hdfs_input_dir = '/haichuan0304/input'
-        subprocess.run(['hdfs', 'dfs', '-mkdir', '-p', hdfs_input_dir], check=True)
-        subprocess.run(['hdfs', 'dfs', '-put', '-f', extract_path + '/*', hdfs_input_dir], check=True)
+        subprocess.run(['hadoop', 'fs', '-mkdir', '-p', hdfs_input_dir], check=True)
+        # subprocess.run(['hadoop', 'fs', '-put', '-f', extract_path + '/*', hdfs_input_dir], check=True)
+        # Expand the wildcard in the path
+        file_list = glob.glob(extract_path + '/*')
+        # Create the command arguments with the expanded file list
+        hadoop_command = ['hadoop', 'fs', '-put', '-f'] + file_list + [hdfs_input_dir]
+        # Run the Hadoop command with the expanded file list
+        subprocess.run(hadoop_command, check=True)
         
         # Run the Hadoop streaming job
         hadoop_streaming_jar = '/usr/lib/hadoop/hadoop-streaming.jar'
         output_hdfs_dir = '/haichuan0304/output'
-        subprocess.run(['hadoop', 'jar', hadoop_streaming_jar, '-file', 'mapper.py', '-mapper', 'python mapper.py',
-                        '-file', 'reducer.py', '-reducer', 'python reducer.py', '-input', hdfs_input_dir,
+        
+        # Remove the output directory if it exists
+        subprocess.run(['hadoop', 'fs', '-rm', '-r', '-f', output_hdfs_dir], check=False)
+
+        subprocess.run(['hadoop', 'jar', hadoop_streaming_jar, '-file', 'mapper_q.py', '-mapper', 'python mapper_q.py',
+                        '-file', 'reducer_q.py', '-reducer', 'python reducer_q.py', '-input', hdfs_input_dir + '/Data/',
                         '-output', output_hdfs_dir], check=True)
+        
+        # subprocess.run(['hadoop', 'jar', hadoop_streaming_jar, '-file', 'mapper_q.py', '-mapper', 'python mapper_q.py',
+        #                 '-file', 'reducer_q.py', '-reducer', 'python reducer_q.py', '-input', hdfs_input_dir,
+        #                 '-output', output_hdfs_dir], check=False, stderr=subprocess.PIPE, text=True)
         
         # Copy the output from HDFS to local filesystem
         local_output_file = os.path.join(app.config['UPLOAD_FOLDER'], 'inverted_index.json')
-        subprocess.run(['hdfs', 'dfs', '-getmerge', output_hdfs_dir, local_output_file], check=True)
-        
+        subprocess.run(['hadoop', 'fs', '-getmerge', output_hdfs_dir, local_output_file], check=True)
+        # hadoop fs
         # Remove the temporary directories
         shutil.rmtree(extract_path)
-        subprocess.run(['hdfs', 'dfs', '-rm', '-r', hdfs_input_dir], check=True)
-        subprocess.run(['hdfs', 'dfs', '-rm', '-r', output_hdfs_dir], check=True)
+        subprocess.run(['hadoop', 'fs', '-rm', '-r', hdfs_input_dir], check=True)
+        subprocess.run(['hadoop', 'fs', '-rm', '-r', output_hdfs_dir], check=True)
         
         return jsonify({"message": "Folder uploaded and processed successfully."})
     else:
         return jsonify({"error": "Allowed file types are ZIP only."})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(use_reloader=False, debug=True, host='0.0.0.0')

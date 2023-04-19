@@ -107,7 +107,7 @@ const Search = (props) => {
     // }
     onSearch() {
       axios
-      .get("http://34.106.106.203:5000/top_n_search", {
+      .get("http://34.106.64.114:5000/top_n_search", {
         params: {
           n: document.getElementById("dropdown-selected-value-id").textContent
         }

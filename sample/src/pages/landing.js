@@ -21,19 +21,57 @@ import {Link} from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 
 
+// const uploadCallback = () => {
+//   console.log("uploadCallback");
+//   document.getElementById("circle").style.display = "block";
+//   document.getElementById("upload-button").style.display = "none";
+//   setTimeout(() => {
+//     console.log('file upload!')
+//     document.getElementById("circle").style.display = "none";
+//     document.getElementById("landing-btn1-id").style.display = "none";
+//     document.getElementById("completed-content").style.display = "block";
+//     document.getElementById("go-to-miniSearchEngine").style.display = "block";
+//   }, 4000)
+  
+// };
+
 const uploadCallback = () => {
   console.log("uploadCallback");
   document.getElementById("circle").style.display = "block";
   document.getElementById("upload-button").style.display = "none";
-  setTimeout(() => {
-    console.log('file upload!')
-    document.getElementById("circle").style.display = "none";
-    document.getElementById("landing-btn1-id").style.display = "none";
-    document.getElementById("completed-content").style.display = "block";
-    document.getElementById("go-to-miniSearchEngine").style.display = "block";
-  }, 4000)
   
+  const inputFile = document.getElementById("avatar");
+  const file = inputFile.files[0];
+  
+  if (file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    
+    axios.post("http://34.106.64.114:5000/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(response => {
+      console.log("File uploaded successfully");
+      document.getElementById("circle").style.display = "none";
+      document.getElementById("landing-btn1-id").style.display = "none";
+      document.getElementById("completed-content").style.display = "block";
+      document.getElementById("go-to-miniSearchEngine").style.display = "block";
+    })
+    .catch(error => {
+      console.error("Error uploading file:", error);
+      document.getElementById("circle").style.display = "none";
+      document.getElementById("upload-button").style.display = "block";
+    });
+  } else {
+    console.error("No file selected");
+    document.getElementById("circle").style.display = "none";
+    document.getElementById("upload-button").style.display = "block";
+  }
 };
+
+
 
 const Landing = () => (
   <div>
@@ -49,8 +87,8 @@ const Landing = () => (
       </div>
       <div id = 'completed-content' hidden> Completed! </div>
       <p>&nbsp;</p>
-      <div id='circle' hidden> Uploading <CircularProgress /> </div>
-      <button id="landing-btn1-id" onClick={uploadCallback}> Uploadand Construct Inverted Indicies</button>
+      <div id='circle' hidden> Constructing <CircularProgress /> </div>
+      <button id="landing-btn1-id" onClick={uploadCallback}> Construct Inverted Indicies</button>
     </div>
     <div align= 'center' id = 'go-to-miniSearchEngine' hidden>
       <div style={{'padding': `20px`}}>
