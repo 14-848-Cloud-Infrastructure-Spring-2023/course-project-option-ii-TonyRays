@@ -114,7 +114,7 @@ def upload_folder():
         #                 '-output', output_hdfs_dir], check=False, stderr=subprocess.PIPE, text=True)
         
         # Copy the output from HDFS to local filesystem
-        local_output_file = os.path.join(app.config['UPLOAD_FOLDER'], 'inverted_index.json')
+        local_output_file = './inverted_index.json' # os.path.join(app.config['UPLOAD_FOLDER'], 'inverted_index.json')
         subprocess.run(['hadoop', 'fs', '-getmerge', output_hdfs_dir, local_output_file], check=True)
         # hadoop fs
         # Remove the temporary directories
