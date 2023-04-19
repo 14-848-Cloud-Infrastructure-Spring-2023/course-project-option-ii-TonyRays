@@ -32,7 +32,7 @@ const Dropdown = ({ placeHolder, options }) => {
     event.stopPropagation();
     setShowMenu(!showMenu);
     console.log("event:", event.target.textContent);
-    if (event.target.textContent !== "10" && event.target.textContent !== "20" && event.target.textContent !== "50") {
+    if (event.target.textContent !== "10" && event.target.textContent !== "20" && event.target.textContent !== "50" && event.target.textContent !== "100") {
       return;
     }
     let ele = document.getElementById("dropdown-selected-value-id");
