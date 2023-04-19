@@ -6,7 +6,7 @@ including:
 1. Brief introduction to the first application
 2. How I create the second application step by step
 
-Recording:
+compressed video:
 [final_project_video.mp4](final_project_video.mp4)
 
 - 0:00 how to run these applications
@@ -15,6 +15,8 @@ Recording:
 - 3:27 Brief introduction to the first application & dockerFile
 - 4:56 How I create the second application step by step
 - 10:03 demo
+
+(Or https://cmu.box.com/s/elinym7u27rmrh5bd5r5ycbtq3p5404s (43.4MB))
 
 Docker Hub images:
 tonyrays/dockerhub:projtimagepush2
