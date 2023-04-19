@@ -20,6 +20,8 @@ download compressed video:
 - 4:56 How I create the second application step by step
 - 10:03 demo
 
+Update: 
+[second_video_execution_time.mp4](second_video_execution_time.mp4)
 
 
 Docker Hub images:
