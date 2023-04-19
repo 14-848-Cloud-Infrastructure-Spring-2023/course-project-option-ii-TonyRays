@@ -3,7 +3,7 @@ Final project report:
 [848final.pdf (11 pages)](848final.pdf) 
 including:
 
-0. How to run these applications
+0. How to run these applications (Open 848final.docx if you want to copy cmd commands)
 1. Brief introduction to the first application
 2. How I create the second application step by step
 
