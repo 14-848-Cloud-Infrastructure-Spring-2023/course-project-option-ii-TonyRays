@@ -7,7 +7,7 @@ including:
 2. How I create the second application step by step
 
 compressed video:
-[final_project_video.mp4](final_project_video.mp4)
+[final_project_video_compressed.mp4](final_project_video_compressed.mp4)
 
 - 0:00 how to run these applications
 - 2:40 note1 Create a firewall rule to allow traffic to port 5000
