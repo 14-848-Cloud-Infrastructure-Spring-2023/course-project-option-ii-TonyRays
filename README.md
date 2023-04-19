@@ -7,8 +7,11 @@ including:
 1. Brief introduction to the first application
 2. How I create the second application step by step
 
-compressed video:
+
+download compressed video:
 [final_project_video_compressed.mp4](final_project_video_compressed.mp4)
+
+(Or https://cmu.box.com/s/elinym7u27rmrh5bd5r5ycbtq3p5404s (43.4MB))
 
 - 0:00 how to run these applications
 - 2:40 note1 Create a firewall rule to allow TCP connection to port 5000
@@ -17,7 +20,7 @@ compressed video:
 - 4:56 How I create the second application step by step
 - 10:03 demo
 
-(Or https://cmu.box.com/s/elinym7u27rmrh5bd5r5ycbtq3p5404s (43.4MB))
+
 
 Docker Hub images:
 tonyrays/dockerhub:projtimagepush2
