@@ -20,7 +20,8 @@ download compressed video:
 - 4:56 How I create the second application step by step
 - 10:03 demo
 
-Update: 
+Update: I recently noticed that I forgot to include the execution time in the output, so I have updated my functions to return this information. Sorry for the inconvience.
+
 [second_video_execution_time.mp4](second_video_execution_time.mp4)
 
 
