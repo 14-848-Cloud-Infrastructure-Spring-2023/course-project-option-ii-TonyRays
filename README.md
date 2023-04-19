@@ -23,7 +23,7 @@ download compressed video:
 Update: I recently noticed that I forgot to include the execution time in the output, so I have updated my functions to return this information. Sorry for the inconvience.
 
 [second_video_execution_time.mp4](second_video_execution_time.mp4)
-
+(Or https://cmu.box.com/s/hfu8um3kix9gh7v97wcwq5jwujxofx3o (5.6 MB))
 
 Docker Hub images:
 tonyrays/dockerhub:projtimagepush2
